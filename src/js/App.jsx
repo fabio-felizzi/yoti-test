@@ -4,7 +4,7 @@ import Moment from 'moment';
 import { v4 } from 'uuid';
 import mockData from './mock-data.json';
 import Activity from './components/Activity.jsx';
-import Modal from './components/Modal.jsx'; 
+import Modal from './components/Modal.jsx';
 
 require('../sass/app.scss');
 require('../sass/sprite.css');
@@ -38,7 +38,7 @@ class App extends Component {
             selectedActivity: null
         });
     }
-    
+
     render() {
         const { data, selectedActivity } = this.state;
         return (
@@ -63,7 +63,7 @@ class App extends Component {
                             <li className="App__list-item" key={v4()}>
                                 <Activity
                                     type={activity.type}
-                                    dayOrDate={Moment.unix(activity.transaction["unix-timestamp"]).calendar(null, { sameDay: '[Today]', sameElse: 'D MMMM YYYY'})}
+                                    dayOrDate={Moment.unix(activity.transaction["unix-timestamp"]).calendar(null, { sameDay: '[Today]', sameElse: 'D MMMM YYYY' })}
                                     time={Moment.unix(activity.transaction["unix-timestamp"]).format("HH:mm")}
                                     id={activity.id}
                                     onActivityClick={this.onActivityClick}
@@ -73,16 +73,17 @@ class App extends Component {
                     </ul>
                 </div>
                 {selectedActivity &&
-                    <Modal 
+                    <Modal
+                        isShare={selectedActivity.type === "share" ? true : false}
                         onModalClose={this.onModalClose}
                         backgroundColor={"application" in selectedActivity ? selectedActivity.application.appearance["bg-color"] : undefined}
                         backgroundImage={"application" in selectedActivity ? selectedActivity.application.appearance["bg-logo"] : undefined}
-                        selfie={selectedActivity}
+                        selfieURL={_.findKey(selectedActivity.transaction.attributes, "selfie") === undefined || typeof selectedActivity.transaction.attributes[_.findIndex(selectedActivity.transaction.attributes, 'selfie')].selfie === "boolean" ? undefined : selectedActivity.transaction.attributes[_.findIndex(selectedActivity.transaction.attributes, 'selfie')].selfie}
                         applicationName={"application" in selectedActivity ? selectedActivity.application.name : undefined}
                         time={Moment.unix(selectedActivity.transaction["unix-timestamp"]).format("HH:mm")}
                         date={Moment.unix(selectedActivity.transaction["unix-timestamp"]).format("D MMMM YYYY")}
-                        givenName={selectedActivity.transaction.attributes[0] === "given-names" ? selectedActivity.transaction.attributes[0]["given-names"] : undefined }
-                        telNumber={selectedActivity.transaction.attributes[1] === "mobile-number" ? selectedActivity.transaction.attributes[1]["mobile-number"] : undefined }
+                        givenName={selectedActivity.transaction.attributes[0] === "given-names" ? selectedActivity.transaction.attributes[0]["given-names"] : undefined}
+                        telNumber={selectedActivity.transaction.attributes[1] === "mobile-number" ? selectedActivity.transaction.attributes[1]["mobile-number"] : undefined}
                     />
                 }
             </div>
