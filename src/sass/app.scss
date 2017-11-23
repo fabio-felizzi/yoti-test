@@ -1,1 +1,31 @@
+@import 'project-specific-styleguide/colours';
 
+#container {
+    #navbar {
+        .logo {
+            color: $blue;
+        }
+
+        .menu-section {
+            color: $red;
+        }
+
+        .avatar {
+            color: $blue;
+        }
+    }
+
+    #sidebar {
+        .sidebar-list {
+            .sidebar-item {
+                color: $blue;
+            }
+        }
+    }
+
+    #main-content {
+        #activity-wrapper {
+            color: $red;
+        }
+    }
+}

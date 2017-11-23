@@ -1,0 +1,19 @@
+@import '../project-specific-styleguide/colours';
+
+.activity-item {
+    border: 2px solid $red;
+
+    .header-wrapper {
+        font-size: 18px;
+    }
+
+    .details-wrapper {
+        .checkmark {}
+
+        .avatar {}
+
+        .details {}
+
+        .timestamp-details {}
+    }
+}
