@@ -1,9 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {Component} from 'react';
 
 require('../sass/app.scss');
 
-export default class App extends React.Component {
+export default class App extends Component {
     render() {
         return (
             <div id="container">
