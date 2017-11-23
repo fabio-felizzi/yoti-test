@@ -21,7 +21,7 @@ export default class App extends Component {
                     <hr/>
                     <h1>Activity</h1>
                     <p>See a record of everyone you have shared details with.</p>
-                    <div id="activity-wrapper"></div>
+                    <ul id="activity-list"></ul>
                 </div>
             </div>
         );
