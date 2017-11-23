@@ -1,13 +1,9 @@
 @import 'project-specific-styleguide/colours';
-@import 'sprite';
 
 #container {
     #navbar {
         background-color: grey;
         height: 130px;
-        .logo {
-            
-        }
 
         .menu-section {
             color: $red;
