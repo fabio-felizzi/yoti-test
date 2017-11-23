@@ -63,7 +63,8 @@ class App extends Component {
                             <li className="App__list-item" key={v4()}>
                                 <Activity
                                     type={activity.type}
-                                    timeStamp={activity.transaction["unix-timestamp"]}
+                                    dayOrDate={Moment.unix(activity.transaction["unix-timestamp"]).calendar(null, { sameDay: '[Today]', sameElse: 'D MMMM YYYY'})}
+                                    time={Moment.unix(activity.transaction["unix-timestamp"]).format("HH:mm")}
                                     id={activity.id}
                                     onActivityClick={this.onActivityClick}
                                 />
@@ -78,7 +79,8 @@ class App extends Component {
                         backgroundImage={"application" in selectedActivity ? selectedActivity.application.appearance["bg-logo"] : undefined}
                         selfie={selectedActivity}
                         applicationName={"application" in selectedActivity ? selectedActivity.application.name : undefined}
-                        timeStamp={selectedActivity.transaction["unix-timestamp"]}
+                        time={Moment.unix(selectedActivity.transaction["unix-timestamp"]).format("HH:mm")}
+                        date={Moment.unix(selectedActivity.transaction["unix-timestamp"]).format("D MMMM YYYY")}
                         givenName={selectedActivity.transaction.attributes[0] === "given-names" ? selectedActivity.transaction.attributes[0]["given-names"] : undefined }
                         telNumber={selectedActivity.transaction.attributes[1] === "mobile-number" ? selectedActivity.transaction.attributes[1]["mobile-number"] : undefined }
                     />

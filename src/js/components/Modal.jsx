@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 require('../../sass/components/modal.scss');
 
-const Modal = ({ onModalClose, backgroundColor, backgroundImage, selfieURL, applicationName, timeStamp, givenName, telNumber  }) => {
+const Modal = ({ onModalClose, backgroundColor, backgroundImage, selfieURL, applicationName, time, date, givenName, telNumber  }) => {
   let styles = {
     background: `background: url(${backgroundImage})`,
     backgroundColor: `background-color: ${backgroundColor}`
@@ -21,7 +21,7 @@ const Modal = ({ onModalClose, backgroundColor, backgroundImage, selfieURL, appl
           </div>
             <div className="tick-icon"></div>
             <h1>{applicationName}</h1>
-          <p className="timestamp">viewed this infomation about you at {timeStamp}</p>
+          <p className="timestamp">viewed this infomation about you at {time} on {date}</p>
             <hr/>
           </section>
           <section className="given-information">
