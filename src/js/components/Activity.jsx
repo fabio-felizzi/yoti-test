@@ -4,7 +4,7 @@ require('../../sass/components/activity.scss');
 
 const Activity = ({ id, onActivityClick, timeStamp }) => {
     return (
-        <div onClick={() => onActivityClick()}>
+        <div onClick={() => onActivityClick(id)}>
             <h3>{timeStamp}</h3>
             <div className="details-wrapper">
                 <div className="checkmark">Tick here</div>

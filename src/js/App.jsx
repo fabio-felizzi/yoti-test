@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import Moment from 'moment';
 import { v4 } from 'uuid';
 import mockData from './mock-data.json';
 import Activity from './components/Activity.jsx';
+import Modal from './components/Modal.jsx'; 
 
 require('../sass/app.scss');
 require('../sass/sprite.css');
@@ -11,10 +13,12 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            data: []
+            data: [],
+            selectedActivity: null
         };
 
         this.onActivityClick = this.onActivityClick.bind(this);
+        this.onModalClose = this.onModalClose.bind(this);
     }
 
     componentWillMount() {
@@ -23,12 +27,20 @@ class App extends Component {
         });
     }
 
-    onActivityClick() {
-        console.log('click');
+    onActivityClick(id) {
+        this.setState({
+            selectedActivity: _.find(this.state.data, { id })
+        });
+    }
+
+    onModalClose() {
+        this.setState({
+            selectedActivity: null
+        });
     }
     
     render() {
-        const { data } = this.state;
+        const { data, selectedActivity } = this.state;
         return (
             <div id="container">
                 <div id="navbar">
@@ -52,13 +64,25 @@ class App extends Component {
                                 <Activity
                                     type={activity.type}
                                     timeStamp={activity.transaction["unix-timestamp"]}
-                                    id={'blank'}
+                                    id={activity.id}
                                     onActivityClick={this.onActivityClick}
                                 />
                             </li>
                         )}
                     </ul>
                 </div>
+                {selectedActivity &&
+                    <Modal 
+                        onModalClose={this.onModalClose}
+                        backgroundColor={"application" in selectedActivity ? selectedActivity.application.appearance["bg-color"] : undefined}
+                        backgroundImage={"application" in selectedActivity ? selectedActivity.application.appearance["bg-logo"] : undefined}
+                        selfie={selectedActivity}
+                        applicationName={"application" in selectedActivity ? selectedActivity.application.name : undefined}
+                        timeStamp={selectedActivity.transaction["unix-timestamp"]}
+                        givenName={selectedActivity.transaction.attributes[0] === "given-names" ? selectedActivity.transaction.attributes[0]["given-names"] : undefined }
+                        telNumber={selectedActivity.transaction.attributes[1] === "mobile-number" ? selectedActivity.transaction.attributes[1]["mobile-number"] : undefined }
+                    />
+                }
             </div>
         );
     };
