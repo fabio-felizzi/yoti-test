@@ -1,8 +1,5 @@
 node_modules
 
-# Generated content
-dist
-
 # Compiled source #
 ###################
 *.com
