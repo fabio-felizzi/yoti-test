@@ -29,12 +29,14 @@ class App extends Component {
     }
 
     onActivityClick(id) {
+        // Set state to match JSON data with clicked item
         this.setState({
             selectedActivity: _.find(this.state.data, { id })
         });
     }
 
     onModalClose() {
+        // Clear state to remove modal from DOM
         this.setState({
             selectedActivity: null
         });
@@ -42,7 +44,7 @@ class App extends Component {
 
     render() {
         const { data, selectedActivity } = this.state;
-
+        // Had to write a very long conditional here due to the unusual nature of the JSON data, uses lodash to find where "selfie exists and wether it contains image data, or if its a boolean, or if its undefined"
         let selfieURL = null;
         if (selectedActivity) {
             const attrs = selectedActivity.transaction.attributes;
