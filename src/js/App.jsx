@@ -42,10 +42,17 @@ class App extends Component {
         });
     }
 
+    evalDataValue(prop, key, arr) {
+        prop = _.findKey(arr, key) ? arr[_.findIndex(arr, key)][key] : undefined;
+        return prop;
+    }
+
     render() {
         const { data, selectedActivity } = this.state;
         // Had to write a very long conditional here due to the unusual nature of the JSON data, uses lodash to find where "selfie exists and wether it contains image data, or if its a boolean, or if its undefined"
         let selfieURL = null;
+        let givenName = undefined;
+        let telNumber = undefined;
         if (selectedActivity) {
             const attrs = selectedActivity.transaction.attributes;
             selfieURL = (
@@ -54,6 +61,9 @@ class App extends Component {
             )
                 ? undefined
                 : attrs[_.findIndex(attrs, 'selfie')].selfie;
+
+            givenName = this.evalDataValue(givenName, "given-names", attrs);
+            telNumber = this.evalDataValue(telNumber, "mobile-number", attrs);
         }
 
         return (
@@ -97,8 +107,8 @@ class App extends Component {
                         applicationName={"application" in selectedActivity ? selectedActivity.application.name : undefined}
                         time={Moment.unix(selectedActivity.transaction["unix-timestamp"]).format("HH:mm")}
                         date={Moment.unix(selectedActivity.transaction["unix-timestamp"]).format("D MMMM YYYY")}
-                        givenName={selectedActivity.transaction.attributes[0] === "given-names" ? selectedActivity.transaction.attributes[0]["given-names"] : undefined}
-                        telNumber={selectedActivity.transaction.attributes[1] === "mobile-number" ? selectedActivity.transaction.attributes[1]["mobile-number"] : undefined}
+                        givenName={givenName}
+                        telNumber={telNumber}
                     />
                 }
             </div>

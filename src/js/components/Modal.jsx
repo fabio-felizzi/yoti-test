@@ -44,7 +44,9 @@ const Modal = ({ isShare, onModalClose, backgroundColor, backgroundImage, selfie
 
 Modal.defaultProps = {
   applicationName: 'Yoti Shared',
-  selfieURL: "https://www.fillmurray.com/200/200"
+  selfieURL: "https://www.fillmurray.com/200/200",
+  givenName: "No name supplied",
+  telNumber: "No number supplied"
 };
 
 export default Modal;
