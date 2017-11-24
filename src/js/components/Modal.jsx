@@ -4,18 +4,19 @@ import PropTypes from 'prop-types';
 require('../../sass/components/modal.scss');
 
 const Modal = ({ isShare, onModalClose, backgroundColor, backgroundImage, selfieURL, applicationName, time, date, givenName, telNumber }) => {
-  let styles = {
-    background: `background: url(${backgroundImage})`,
-    backgroundColor: `background-color: ${backgroundColor}`
+
+  backgroundColor = {
+    backgroundColor: backgroundColor
   }
+  
   return (
 
     <div className="modal-wrapper" onClick={() => onModalClose()}>
       <div className="modal">
         <i>X</i>
         {isShare &&
-          <section className="header" styles={styles.backgroundColor}>
-            <img src={styles.backgroundImage} alt="modal logo" />
+          <section className="header" style={backgroundColor}>
+          <img src={backgroundImage} alt="modal logo" />
           </section>
         }
         <section className="content">

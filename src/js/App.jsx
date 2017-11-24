@@ -99,7 +99,7 @@ class App extends Component {
                 </div>
                 {selectedActivity &&
                     <Modal
-                        isShare={selectedActivity.type === "share" ? true : false}
+                        isShare={selectedActivity.type !== "share" ? true : false}
                         onModalClose={this.onModalClose}
                         backgroundColor={"application" in selectedActivity ? selectedActivity.application.appearance["bg-color"] : undefined}
                         backgroundImage={"application" in selectedActivity ? selectedActivity.application.appearance["bg-logo"] : undefined}
