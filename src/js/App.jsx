@@ -16,12 +16,13 @@ class App extends Component {
             data: [],
             selectedActivity: null
         };
-
+        // Context binding.
         this.onActivityClick = this.onActivityClick.bind(this);
         this.onModalClose = this.onModalClose.bind(this);
     }
 
     componentWillMount() {
+        // Set state with json data.
         this.setState({
             data: mockData.receipts
         });
@@ -41,6 +42,18 @@ class App extends Component {
 
     render() {
         const { data, selectedActivity } = this.state;
+
+        let selfieURL = null;
+        if (selectedActivity) {
+            const attrs = selectedActivity.transaction.attributes;
+            selfieURL = (
+                _.findKey(attrs, "selfie") === undefined
+                || typeof attrs[_.findIndex(attrs, 'selfie')].selfie === "boolean"
+            )
+                ? undefined
+                : attrs[_.findIndex(attrs, 'selfie')].selfie;
+        }
+
         return (
             <div id="container">
                 <div id="navbar">
@@ -78,7 +91,7 @@ class App extends Component {
                         onModalClose={this.onModalClose}
                         backgroundColor={"application" in selectedActivity ? selectedActivity.application.appearance["bg-color"] : undefined}
                         backgroundImage={"application" in selectedActivity ? selectedActivity.application.appearance["bg-logo"] : undefined}
-                        selfieURL={_.findKey(selectedActivity.transaction.attributes, "selfie") === undefined || typeof selectedActivity.transaction.attributes[_.findIndex(selectedActivity.transaction.attributes, 'selfie')].selfie === "boolean" ? undefined : selectedActivity.transaction.attributes[_.findIndex(selectedActivity.transaction.attributes, 'selfie')].selfie}
+                        selfieURL={selfieURL}
                         applicationName={"application" in selectedActivity ? selectedActivity.application.name : undefined}
                         time={Moment.unix(selectedActivity.transaction["unix-timestamp"]).format("HH:mm")}
                         date={Moment.unix(selectedActivity.transaction["unix-timestamp"]).format("D MMMM YYYY")}
