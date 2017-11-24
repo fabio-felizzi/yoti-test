@@ -1,19 +1,35 @@
 @import '../project-specific-styleguide/colours';
 
-.activity-item {
-    border: 2px solid $red;
-
-    .header-wrapper {
-        font-size: 18px;
+.App__list-item {
+    border: 2px solid rgb(223, 219, 219);
+    padding: 0;
+    list-style-type: none;
+    h3 {
+        margin: 0;
+        width: 100%;
+        background-color: rgb(206, 205, 205);
+         color: rgb(90, 88, 88);
     }
-
     .details-wrapper {
-        .checkmark {}
+        display: flex;
 
-        .avatar {}
+        div {
+            color: rgb(90, 88, 88);
+            width: 100%;
+        }
+        .checkmark {
 
-        .details {}
+        }
+        .avatar {
 
-        .timestamp-details {}
+        }
+        .details {
+            color: rgb(22, 22, 22);
+        }
+        .timestamp-details {
+            p {
+
+            }
+        }
     }
 }
